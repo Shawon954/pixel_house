@@ -95,8 +95,6 @@ class _ADDImageState extends State<ADDImage> {
 
   }
 
-
-
     User? user = FirebaseAuth.instance.currentUser;
 
   bool uploading = false;

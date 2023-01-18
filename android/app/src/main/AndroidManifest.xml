@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pixel_house">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
    <application
         android:label="My Pixel Store"
         android:name="${applicationName}"

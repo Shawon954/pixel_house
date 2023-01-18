@@ -20,10 +20,7 @@ class _SingUpPageState extends State<SingUpPage> {
 
   bool isLoaded = false;
 
-  singupsubmithundel() {
-    _formKey.currentState!.validate();
-    _formKey.currentState!.save();
-  }
+
 
   TextEditingController _name = TextEditingController();
   TextEditingController _email = TextEditingController();
@@ -274,25 +271,29 @@ class _SingUpPageState extends State<SingUpPage> {
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.5,
                       color: Colors.white),),
-                onPressed: (){
+                onPressed: ()async{
 
                   // if(isLoaded) return;
                   // setState(()=>isLoaded = true);
                   // await Future.delayed(Duration(seconds: 3));
                   // setState(()=>isLoaded = false);
 
+                   if(_formKey.currentState!.validate()){
+
+                     var singupname = _name.text.trim();
+                     var upemail = _email.text.trim();
+                     var uppass = _password.text.trim();
+                     var  singupphone = _phone.text.trim();
+
+                     final userinput = DataHelper();
+                     userinput.singUP(upemail, uppass,context,singupname,singupphone,);
+                     Writeinfo(singupname,upemail,singupphone);
+
+                       _formKey.currentState!.save();
+
+                   }
 
 
-                  var singupname = _name.text.trim();
-                  var upemail = _email.text.trim();
-                  var uppass = _password.text.trim();
-                  var  singupphone = _phone.text.trim();
-
-
-
-                 final userinput = DataHelper();
-                 userinput.singUP(upemail, uppass,context,singupname,singupphone,);
-                  Writeinfo(singupname,upemail,singupphone);
 
                 },
               ),

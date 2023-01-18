@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   final box = GetStorage();
 
   chooseScreen()async{
-    var UserID =await box.read('id');
+    var UserID =await box.read('LOGING');
     if(UserID!= null){
     return Get.offAndToNamed('/home_page');
     }

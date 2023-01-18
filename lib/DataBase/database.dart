@@ -1,27 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pixel_house/homepage.dart';
 
-final box = GetStorage();
-
-
-class AuthService{
-
-
-  TextEditingController _name = TextEditingController();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
-  TextEditingController _phone = TextEditingController();
-}
 
 
 class DataHelper {
 
 
-
+  var Box = GetStorage();
 
   Future singUP( email, password, context, String singupname, String singupphone,)async{
 
@@ -34,8 +24,19 @@ class DataHelper {
       var nano = authCredential;
 
       if(nano!.uid.isNotEmpty){
+          Box.write('LOGING', nano.uid);
+           Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
 
-        return Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+           Fluttertoast.showToast(
+
+               msg: 'Singup Successful'
+
+           );
+
+
+
+
+
       }else{
         return 'singup filed';
       }
@@ -63,6 +64,7 @@ class DataHelper {
 
       var authCredential = credential.user;
       if (authCredential!.uid.isNotEmpty) {
+        Box.write('LOGING', authCredential.uid);
         return Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       } else {

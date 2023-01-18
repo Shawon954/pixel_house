@@ -14,10 +14,24 @@ class _ProfileState extends State<Profile> {
 
   final currentUser = FirebaseAuth.instance;
 
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+
+
       child: Scaffold(
+          drawer: Drawer(
+            key: _globalKey,
+          ),
+
+          appBar: AppBar(
+  automaticallyImplyLeading: false,
+
+),
+
           body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('UserInfoData')
