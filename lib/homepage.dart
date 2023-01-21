@@ -10,6 +10,7 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pixel_house/details.dart';
 
 class HomePage extends StatefulWidget {
@@ -112,21 +113,14 @@ class _HomePageState extends State<HomePage> {
 
   var boxxx = GetStorage();
 
-  bool isUploadImage = false;
-  var selectImage;
+  File? file;
+  ImagePicker image = ImagePicker();
+  String? ImagePath;
 
-
-  uploadProfileImage() async {
-    var picker = ImagePicker();
-    var image = await picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      setState(() {
-        selectImage = image.path;
-
-      });
-
-    }
-    if (!mounted) return;
+  @override
+  void initState() {
+    getData();
+    super.initState();
   }
 
   @override
@@ -155,32 +149,52 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Container(
-                    width: 128.0,
-                    height: 128.0,
-                    margin: EdgeInsets.only(
-                      top: 24.0,
-                      bottom: 64.0,
-                    ),
-                    child: CircleAvatar(
-                      radius: 50,
 
-                      child: ClipOval(
-                        child: IconButton(
-                            onPressed: () {
-                              uploadProfileImage();
-                              setState(() {
-                                isUploadImage = true;
-
-                              });
-                            },
-                            icon: Icon(Icons.add)),
-                      ),
-                    ),
-                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+
                     children: [
+                      SizedBox(height: 100,),
+                      Stack(
+                        children: [
+                          CircleAvatar(
+                              radius: 60,
+                              child: Stack(
+                                children: [
+                                  ClipOval(
+                                    child: ImagePath == null
+                                        ? Icon(
+                                      Icons.image,
+                                      size: 30,
+                                    )
+                                        : Image.file(
+                                      File(ImagePath!),
+                                      height: 120,
+                                      width: 300,
+                                      filterQuality: FilterQuality.high,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          Positioned(
+                              top: 80,
+                              right: 2,
+                              child: InkWell(
+                                onTap: () {
+
+                                  getgall();
+                                },
+                                child: Icon(
+                                  Icons.image_rounded,
+                                  color: Colors.amber,
+                                ),
+                              )),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Text(
                         'Name: ${dataread.read('name')}',
                         style: TextStyle(
@@ -225,18 +239,18 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white),
                     ),
                   ),
-                  ListTile(
-                    onTap: () => Get.toNamed('/profile_page'),
-                    leading: Icon(Icons.home),
-                    title: Text(
-                      'profile',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'ProstoOne',
-                          fontWeight: FontWeight.normal,
-                          color: Colors.white),
-                    ),
-                  ),
+                  // ListTile(
+                  //   onTap: () => Get.toNamed('/profile_page'),
+                  //   leading: Icon(Icons.home),
+                  //   title: Text(
+                  //     'profile',
+                  //     style: TextStyle(
+                  //         fontSize: 16,
+                  //         fontFamily: 'ProstoOne',
+                  //         fontWeight: FontWeight.normal,
+                  //         color: Colors.white),
+                  //   ),
+                  // ),
 
                   ListTile(
                     onTap: () async {
@@ -290,11 +304,34 @@ class _HomePageState extends State<HomePage> {
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
-                return Text('Something went wrong');
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Lottie.asset('assets/somthingworng/sad'),
+                    SizedBox(height: 10,),
+                    Text('Something went wrong',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'ProstoOne',
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white),),
+                  ],
+                );
               }
 
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Text("Loading");
+                return Column(
+                  children: [
+                    Lottie.asset('assets/loadding/loading-animation.json',height: 100,width: 60),
+                    SizedBox(height: 10,),
+                    Text('Loading',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'ProstoOne',
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white),),
+                  ],
+                );
               }
 
               return GridView(
@@ -337,9 +374,11 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 placeholder: (context, url) => Center(
-                                    child: CircularProgressIndicator(
-                                  strokeWidth: 4,
-                                )),
+                                //     child: CircularProgressIndicator(
+                                //   strokeWidth: 4,
+                                // )),
+                                     child:  Lottie.asset('assets/loadding/loading-animation.json',height: 100,width: 60),
+                                ),
                                 errorWidget: (context, url, error) =>
                                     Icon(Icons.error),
                               ),
@@ -378,5 +417,28 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+  getgall() async {
+    var img = await image.getImage(source: ImageSource.gallery);
+
+    if (img != null) {
+      SaveData(img.path.toString());
+      setState(() {
+        file = File(img!.path);
+      });
+    }
+  }
+
+  var proimag = GetStorage();
+
+  void SaveData(String val) async {
+    proimag.write('imag', val);
+    getData();
+  }
+
+  void getData() async {
+    setState(() {
+      ImagePath = proimag.read('imag');
+    });
   }
 }

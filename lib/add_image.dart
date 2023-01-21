@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:path/path.dart' as path;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:pixel_house/DataBase/database.dart';
@@ -104,7 +105,9 @@ class _ADDImageState extends State<ADDImage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
+
+          backgroundColor: Colors.blueGrey,
           title: Text(
             'Add Image ',
             style: TextStyle(
@@ -174,10 +177,7 @@ class _ADDImageState extends State<ADDImage> {
                     ),
                   ),
                   SizedBox(height: 10,),
-                  CircularProgressIndicator(
-                    value: val,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                  )
+                Lottie.asset('assets/loadding/loading-animation.json',height: 100,width: 60,),
 
                 ],
               ),
