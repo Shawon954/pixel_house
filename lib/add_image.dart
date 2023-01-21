@@ -152,13 +152,14 @@ class _ADDImageState extends State<ADDImage> {
                    
 
                     decoration: BoxDecoration(
-                        color: Colors.amber,
+
                         image: DecorationImage(image: FileImage(_uploadimage[index-1]))
                   ),
                   );
                 }),
             uploading?Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Center(
                     child: Container(
@@ -168,10 +169,11 @@ class _ADDImageState extends State<ADDImage> {
                             fontSize: 14,
                             fontFamily: 'ProstoOne',
                             fontWeight: FontWeight.normal,
-                            color: Colors.white),
+                            color: Colors.amber),
                       ),
                     ),
                   ),
+                  SizedBox(height: 10,),
                   CircularProgressIndicator(
                     value: val,
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.green),

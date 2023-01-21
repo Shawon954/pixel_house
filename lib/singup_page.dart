@@ -19,7 +19,7 @@ class _SingUpPageState extends State<SingUpPage> {
   final _formKey = GlobalKey<FormState>();
 
   bool isLoaded = false;
-
+  bool pass = true;
 
 
   TextEditingController _name = TextEditingController();
@@ -29,18 +29,6 @@ class _SingUpPageState extends State<SingUpPage> {
 
   final boxx = GetStorage();
 
-
-   Writeinfo(singupname,upemail,singupphone){
-      FirebaseAuth _auth = FirebaseAuth.instance;
-     CollectionReference ref = FirebaseFirestore.instance.collection('UserInfoData');
-      ref.add({
-
-        'name':singupname,
-            'email':upemail,
-      'phone':singupphone,
-        'id':_auth.currentUser!.uid,
-      });
-   }
 
 
   @override
@@ -113,6 +101,7 @@ class _SingUpPageState extends State<SingUpPage> {
                       cursorColor: Colors.white,
                       cursorHeight: 25,
                       decoration: InputDecoration(
+                          prefixIcon:  Icon(Icons.person,color: Colors.white,),
                           labelText: 'N@me',
                           labelStyle:
                               TextStyle(fontSize: 20, color: Colors.white),
@@ -143,7 +132,9 @@ class _SingUpPageState extends State<SingUpPage> {
                       style: TextStyle(color: Colors.white, fontSize: 20),
                       cursorColor: Colors.white,
                       cursorHeight: 25,
+
                       decoration: InputDecoration(
+                          prefixIcon:  Icon(Icons.email_outlined,color: Colors.white,),
                           labelText: 'Em@il',
                           labelStyle:
                               TextStyle(fontSize: 20, color: Colors.white),
@@ -170,30 +161,70 @@ class _SingUpPageState extends State<SingUpPage> {
                     ),
                     TextFormField(
                       controller: _password,
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      keyboardType: TextInputType.text,
+                      obscureText: pass,
+                      style: TextStyle(color: Colors.white,fontSize: 20),
                       cursorColor: Colors.white,
                       cursorHeight: 25,
                       decoration: InputDecoration(
+
                           labelText: 'P@ssword',
-                          labelStyle:
-                              TextStyle(fontSize: 20, color: Colors.white),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.white, width: 2.0),
+
+                          prefixIcon:  Icon(Icons.lock_open_outlined,color: Colors.white,),
+                          suffixIcon: GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                pass = !pass;
+                              });
+                            },
+                            child: Icon(pass? Icons.visibility_off_outlined:Icons.visibility_outlined,color: Colors.white,),
+                          ),
+                          labelStyle: TextStyle(fontSize: 20,color: Colors.white),
+                          focusedBorder:OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white, width: 2.0),
                             borderRadius: BorderRadius.circular(10.5),
                           ),
+
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.5),
-                              borderSide: BorderSide(width: 1.5)),
-                          fillColor: Colors.grey,
-                          focusColor: Colors.grey),
+                              borderSide: BorderSide(
+                                  width: 1.5
+                              )
+                          ),
+                          fillColor: Colors.grey, focusColor: Colors.grey),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Your P@ssword';
+                          return 'Your Password';
                         }
                         return null;
                       },
                     ),
+                    // TextFormField(
+                    //   controller: _password,
+                    //   style: TextStyle(color: Colors.white, fontSize: 20),
+                    //   cursorColor: Colors.white,
+                    //   cursorHeight: 25,
+                    //   decoration: InputDecoration(
+                    //       labelText: 'P@ssword',
+                    //       labelStyle:
+                    //           TextStyle(fontSize: 20, color: Colors.white),
+                    //       focusedBorder: OutlineInputBorder(
+                    //         borderSide: const BorderSide(
+                    //             color: Colors.white, width: 2.0),
+                    //         borderRadius: BorderRadius.circular(10.5),
+                    //       ),
+                    //       border: OutlineInputBorder(
+                    //           borderRadius: BorderRadius.circular(10.5),
+                    //           borderSide: BorderSide(width: 1.5)),
+                    //       fillColor: Colors.grey,
+                    //       focusColor: Colors.grey),
+                    //   validator: (value) {
+                    //     if (value!.isEmpty) {
+                    //       return 'Your P@ssword';
+                    //     }
+                    //     return null;
+                    //   },
+                    // ),
                     SizedBox(
                       height: 20,
                     ),
@@ -204,6 +235,7 @@ class _SingUpPageState extends State<SingUpPage> {
                       cursorColor: Colors.white,
                       cursorHeight: 25,
                       decoration: InputDecoration(
+                          prefixIcon:  Icon(Icons.phone,color: Colors.white,),
                           labelText: 'Phone',
                           labelStyle:
                               TextStyle(fontSize: 20, color: Colors.white),
@@ -287,9 +319,11 @@ class _SingUpPageState extends State<SingUpPage> {
 
                      final userinput = DataHelper();
                      userinput.singUP(upemail, uppass,context,singupname,singupphone,);
-                     Writeinfo(singupname,upemail,singupphone);
-
                        _formKey.currentState!.save();
+
+                       boxx.write('name', singupname,);
+                       boxx.write('email', upemail,);
+                       boxx.write('phone',singupphone);
 
                    }
 

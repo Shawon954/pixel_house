@@ -13,6 +13,9 @@ class DataHelper {
 
   var Box = GetStorage();
 
+
+
+
   Future singUP( email, password, context, String singupname, String singupphone,)async{
 
     FirebaseAuth _auth = FirebaseAuth.instance;

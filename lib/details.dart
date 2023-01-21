@@ -17,7 +17,7 @@ class DETAILS extends StatelessWidget {
 
   imagedownload()async{
   if(imageLiknk != null){
-    GallerySaver.saveImage(imageLiknk,albumName: '');
+    GallerySaver.saveImage(imageLiknk,albumName: 'Pixcel Store');
     Get.snackbar('Image', 'Download Successfully');
   }
      else{
@@ -76,7 +76,7 @@ class DETAILS extends StatelessWidget {
                             onTap: (){
                               imageshare();
                             },
-                        child: Lottie.asset('assets/share/share-icon.json',height: 30,width: 30,),
+                        child: Lottie.asset('assets/share/share-icon.json',height: 25,width: 25,),
                       ),
                       InkWell(
                             onTap: (){
