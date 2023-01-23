@@ -39,7 +39,7 @@ class _InternetConnectionState extends State<InternetConnection> {
 
 
 
-  Future<void> checkConnection() async {
+  Future checkConnection() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
       Fluttertoast.showToast(

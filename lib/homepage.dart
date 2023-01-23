@@ -12,6 +12,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pixel_house/details.dart';
+import 'package:pixel_house/profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,30 +32,84 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30))),
-              height: 200,
+              height: 150,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Are you sure to exit ?'),
+                  Text('Are you sure to exit ?',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'ProstoOne',
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                        color: Colors.grey),),
                   SizedBox(
-                    height: 80,
+                    height: 40,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton(
-                          onPressed: () {
+                      SizedBox(
+                        height: Get.height/20,
+                        width: Get.width/3.8,
+                        child: ElevatedButton(
+
+                          style:ElevatedButton.styleFrom(
+                              backgroundColor: Colors.grey,
+
+                              foregroundColor: Colors.deepPurpleAccent,
+                              elevation: 3.0,
+                              side: BorderSide(
+                                  color: Colors.white,
+                                  width: 1.2
+                              )
+                          ),
+                          child: Text('Yes',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'ProstoOne',
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.5,
+                                color: Colors.white),),
+                          onPressed: (){
                             if (Platform.isAndroid) {
                               SystemNavigator.pop();
                             }
                           },
-                          child: Text('Yes')),
+                        ),
+                      ),
                       VerticalDivider(),
-                      ElevatedButton(
-                          onPressed: () {
+                      SizedBox(
+                        height: Get.height/20,
+                        width: Get.width/3.8,
+                        child: ElevatedButton(
+
+                          style:ElevatedButton.styleFrom(
+                              backgroundColor: Colors.grey,
+
+                              foregroundColor: Colors.deepPurpleAccent,
+                              elevation: 3.0,
+                              side: BorderSide(
+                                  color: Colors.white,
+                                  width: 1.2
+                              )
+                          ),
+                          child: Text('No',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'ProstoOne',
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.5,
+                                color: Colors.white),),
+                          onPressed: (){
                             Navigator.pop(context);
                           },
-                          child: Text('No')),
+                        ),
+                      ),
+
+
+
+
                     ],
                   )
                 ],
@@ -150,82 +205,85 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
 
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
 
-                    children: [
-                      SizedBox(height: 100,),
-                      Stack(
-                        children: [
-                          CircleAvatar(
-                              radius: 60,
-                              child: Stack(
-                                children: [
-                                  ClipOval(
-                                    child: ImagePath == null
-                                        ? Icon(
-                                      Icons.image,
-                                      size: 30,
-                                    )
-                                        : Image.file(
-                                      File(ImagePath!),
-                                      height: 120,
-                                      width: 300,
-                                      filterQuality: FilterQuality.high,
-                                      fit: BoxFit.cover,
+                      children: [
+                        SizedBox(height: 100,),
+                        Stack(
+                          children: [
+                            CircleAvatar(
+                                radius: 60,
+                                child: Stack(
+                                  children: [
+                                    ClipOval(
+                                      child: ImagePath == null
+                                          ? Icon(
+                                        Icons.image,
+                                        size: 30,
+                                      )
+                                          : Image.file(
+                                        File(ImagePath!),
+                                        height: 120,
+                                        width: 300,
+                                        filterQuality: FilterQuality.high,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              )),
-                          Positioned(
-                              top: 80,
-                              right: 2,
-                              child: InkWell(
-                                onTap: () {
+                                  ],
+                                )),
+                            Positioned(
+                                top: 80,
+                                right: 2,
+                                child: InkWell(
+                                  onTap: () {
 
-                                  getgall();
-                                },
-                                child: Icon(
-                                  Icons.image_rounded,
-                                  color: Colors.amber,
-                                ),
-                              )),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Name: ${dataread.read('name')}',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'ProstoOne',
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Email: ${dataread.read('email')}',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'ProstoOne',
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Phone: ${dataread.read('phone')}',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'ProstoOne',
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white),
-                      ),
-                    ],
+                                    getgall();
+                                  },
+                                  child: Icon(
+                                    Icons.image_rounded,
+                                    color: Colors.amber,
+                                  ),
+                                )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Name: ${dataread.read('name')}',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'ProstoOne',
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          'Email:${dataread.read('email')}',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'ProstoOne',
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          'Phone: ${dataread.read('phone')}',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'ProstoOne',
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
                   ListTile(
                     onTap: () => Get.toNamed('/home_page'),
@@ -290,13 +348,18 @@ class _HomePageState extends State<HomePage> {
             automaticallyImplyLeading: false,
             backgroundColor: Colors.blueGrey,
             centerTitle: true,
-            title: Text(
-              'My Pixel ',
-              style: TextStyle(
-                  fontSize: 22,
-                  fontFamily: 'ProstoOne',
-                  fontWeight: FontWeight.normal,
-                  color: Colors.white),
+            title: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+              },
+              child: Text(
+                'My Pixel ',
+                style: TextStyle(
+                    fontSize: 22,
+                    fontFamily: 'ProstoOne',
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white),
+              ),
             ),
           ),
           body: StreamBuilder<QuerySnapshot>(

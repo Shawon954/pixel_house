@@ -60,7 +60,8 @@ dependencies:
   firebase_messaging: ^14.2.0
   cloud_firestore: ^4.3.0
   firebase_storage: ^11.0.10
-
+  # Google Singin #
+  google_sign_in: ^5.4.3
 
 
 dev_dependencies:
@@ -93,6 +94,8 @@ flutter:
      - assets/internet/
      - assets/loadding/
      - assets/somthingworng/
+     - assets/social_icon/
+     - assets/about/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

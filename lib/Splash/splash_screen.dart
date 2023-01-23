@@ -18,10 +18,10 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  final box = GetStorage();
+  final boxx = GetStorage();
 
   chooseScreen()async{
-    var UserID =await box.read('LOGING');
+    var UserID =await boxx.read('LOGING');
     if(UserID!= null){
     return Get.offAndToNamed('/home_page');
     }
@@ -31,14 +31,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
  
-  Future<void> SelectPage()async{
+   SelectPage()async{
      var connectivityResult = await (Connectivity().checkConnectivity());
      if(connectivityResult == ConnectivityResult.none){
 
        Navigator.push(context, MaterialPageRoute(builder: (context) => InternetConnection()));
 
      }else{
-       Navigator.push(context, MaterialPageRoute(builder: (context) => chooseScreen()));
+       Navigator.push(context, MaterialPageRoute(builder: (context) =>chooseScreen()));
      }
    }
 

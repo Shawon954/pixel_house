@@ -4,50 +4,46 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pixel_house/homepage.dart';
 
 
 
 class DataHelper {
 
-
   var Box = GetStorage();
 
-
-
-
-  Future singUP( email, password, context, String singupname, String singupphone,)async{
-
+  Future singUP(email, password, context, String singupname,String singupphone,) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
 
-        try {
-      UserCredential credential = await _auth. createUserWithEmailAndPassword(email: email, password: password,);
+    try {
+      UserCredential credential = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password,);
 
       var authCredential = credential.user;
       var nano = authCredential;
 
-      if(nano!.uid.isNotEmpty){
-          Box.write('LOGING', nano.uid);
-           Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+      if (nano!.uid.isNotEmpty) {
+        Box.write('LOGING', nano.uid);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
 
-           Fluttertoast.showToast(
+        Fluttertoast.showToast(
 
-               msg: 'Singup Successful'
+            msg: 'Singup Successful'
 
-           );
-
-
-
-
-
-      }else{
+        );
+      } else {
         return 'singup filed';
       }
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
+        Get.snackbar('weak-password', 'The password provided is too weak.');
         print('The password provided is too weak.');
+
       } else if (e.code == 'email-already-in-use') {
+        Get.snackbar('email-already-in-use', 'The account already exists for that email.');
+
         print('The account already exists for that email.');
       }
     } catch (e) {
@@ -55,12 +51,10 @@ class DataHelper {
     }
   }
 
-
-
   Future singIN(email, password, context) async {
     try {
       UserCredential credential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -68,21 +62,25 @@ class DataHelper {
       var authCredential = credential.user;
       if (authCredential!.uid.isNotEmpty) {
         Box.write('LOGING', authCredential.uid);
+        Get.snackbar('Login', 'Successful');
         return Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomePage()));
+
       } else {
-        return "sing in failed";
+        return "Login failed";
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
+        Get.snackbar('weak-password', 'The password provided is too weak.');
         print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
+
+      } else if (e.code == 'Email already in use') {
+        Get.snackbar('email-already-in-use', 'The account already exists for that email.');
         print('The account already exists for that email.');
+
       }
     } catch (e) {
       print(e);
     }
   }
 }
-
-

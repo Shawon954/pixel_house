@@ -14,13 +14,28 @@ List<GetPage>getpage=[
   GetPage(name: '/splash', page: ()=>SplashScreen()),
   GetPage(name: '/internetcheck', page: ()=>InternetConnection()),
   GetPage(name: '/logingpage', page: ()=>SinginPage()),
-  GetPage(name: '/home_page', page: ()=>HomePage()),
   GetPage(name: '/sing_up', page: ()=>SingUpPage()),
-  GetPage(name: '/profile_page', page: ()=>Profile()),
-  GetPage(name: '/addImages_page', page: ()=>ADDImage()),
   GetPage(name: '/forgotpass', page: ()=>ForGetPassword()),
+  GetPage(name: '/home_page', page: ()=>HomePage()),
+  GetPage(name: '/addImages_page', page: ()=>ADDImage()),
+  // GetPage(name: '/profile_page', page: ()=>Profile()),
+
+
   GetPage(name: '/set', page: ()=> Setting()),
 
 
 
 ];
+
+
+   // Profile Code //
+// File? file;
+// ImagePicker image = ImagePicker();
+// String? ImagePath;
+//
+// @override
+// void initState() {
+//   getData();
+//   super.initState();
+// }
+  // profile code //

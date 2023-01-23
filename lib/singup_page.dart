@@ -261,8 +261,9 @@ class _SingUpPageState extends State<SingUpPage> {
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 30,
             ),
+            
             SizedBox(
               height: Get.height/18,
               width: Get.width/1.8,
@@ -333,6 +334,11 @@ class _SingUpPageState extends State<SingUpPage> {
               ),
             ),
             SizedBox(
+              height: 20,
+            ),
+
+            
+            SizedBox(
               height: 50,
             ),
             Row(
@@ -359,6 +365,9 @@ class _SingUpPageState extends State<SingUpPage> {
                   ),
                 )
               ],
+            ),
+            SizedBox(
+              height: 30,
             ),
           ]),
         ),
