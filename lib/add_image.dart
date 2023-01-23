@@ -31,7 +31,7 @@ class _ADDImageState extends State<ADDImage> {
   ImagePicker _imagepicker = ImagePicker();
   ChooseImagegellary()async{
 
-   final pickedFile = await _imagepicker.getImage(source: ImageSource.gallery,imageQuality: 75);
+   final pickedFile = await _imagepicker.getImage(source: ImageSource.gallery,imageQuality: 100);
 
    setState(() {
      _uploadimage.add(File(pickedFile!.path));

@@ -55,7 +55,7 @@ class _SingUpPageState extends State<SingUpPage> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: IconButton(
-                          onPressed: () => Get.toNamed('/singins'),
+                          onPressed: () => Get.toNamed('/logingpage'),
                           icon: Icon(Icons.arrow_back),
                           color: Colors.white,
                         ),
