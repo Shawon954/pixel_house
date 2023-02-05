@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,15 +25,15 @@ class _InternetConnectionState extends State<InternetConnection> {
 
   final box = GetStorage();
 
-  chooseScreen()async{
-    var UserID =await box.read('LOGING');
-    if(UserID!= null){
-      return Get.off('/home_page');
-    }
-    else{
-      return  Get.off('/logingpage');
-    }
-  }
+  // chooseScreen()async{
+  //   var UserID =await box.read('LOGING');
+  //   if(UserID!= null){
+  //     return Get.off('/home_page');
+  //   }
+  //   else{
+  //     return  Get.off('/logingpage');
+  //   }
+  // }
 
 
 
@@ -42,6 +43,7 @@ class _InternetConnectionState extends State<InternetConnection> {
     super.initState();
     checkConnection();
   }
+  User? user = FirebaseAuth.instance.currentUser;
 
 
 
@@ -64,7 +66,6 @@ class _InternetConnectionState extends State<InternetConnection> {
 
     }
     else if (connectivityResult == ConnectivityResult.mobile) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => chooseScreen()));
       print("Mobile internet");
       Fluttertoast.showToast(
         msg: "Mobile internet",
@@ -78,8 +79,14 @@ class _InternetConnectionState extends State<InternetConnection> {
         webBgColor: "red",
         webPosition: "bottom",
       );
+
+      if(user == null){
+        Get.offAndToNamed('/logingpage');
+      }
+      else {
+        Get.offAndToNamed('/home_page');
+      }
     } else if (connectivityResult == ConnectivityResult.wifi) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => chooseScreen()));
       print("WiFi");
       Fluttertoast.showToast(
         msg: "WiFi",
@@ -93,9 +100,13 @@ class _InternetConnectionState extends State<InternetConnection> {
         webBgColor: "red",
         webPosition: "bottom",
       );
-    }else {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => chooseScreen()));
-    }
+      if(user == null){
+        Get.offAndToNamed('/logingpage');
+
+      }
+      else {
+        Get.offAndToNamed('/home_page');
+      }    }
   }
 
   bool isLoaded = false;

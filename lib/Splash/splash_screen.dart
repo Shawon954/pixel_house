@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -17,26 +18,31 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  final boxx = GetStorage();
+  // final boxx = GetStorage();
 
-  chooseScreen()async{
-    var UserID =await boxx.read('LOGING');
-    if(UserID!= null){
-    return Get.offAndToNamed('/home_page');
-    }
-    else{
-     return  Get.offAndToNamed('/logingpage');
-    }
-  }
+  // chooseScreen()async{
+  //   var UserID =await boxx.read('LOGING');
+  //   if(UserID!= null){
+  //   return Get.offAndToNamed('/home_page');
+  //   }
+  //   else{
+  //    return  Get.offAndToNamed('/logingpage');
+  //   }
+  // }
+  User? user = FirebaseAuth.instance.currentUser;
 
     choosewidget() async {
       var connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.none) {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => InternetConnection()));
-      } else {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => chooseScreen()));
+      }
+        else if(user == null){
+        Get.offAndToNamed('/logingpage');
+
+      }
+      else {
+        Get.offAndToNamed('/home_page');
       }
     }
 
