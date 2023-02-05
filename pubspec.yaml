@@ -48,9 +48,11 @@ dependencies:
   fluttertoast: ^8.1.2
   lottie: ^2.2.0
   gallery_saver: ^2.3.2
-  share_plus: ^6.3.0
+  share_plus: any
   connectivity_plus: ^3.0.2
   flutter_profile_picture: ^2.0.0
+  internet_connection_checker: ^1.0.0+1
+  photo_gallery: ^1.1.1
 
 
   # FireBase #

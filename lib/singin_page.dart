@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pixel_house/DataBase/database.dart';
 
 
@@ -16,6 +17,7 @@ class _SinginPageState extends State<SinginPage> {
  final _formKey = GlobalKey<FormState>();
 
   bool pass = true;
+  bool isLoaded = false;
 
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController _passwordcontroller = TextEditingController();
@@ -183,7 +185,7 @@ class _SinginPageState extends State<SinginPage> {
                 SizedBox(
                   height: 50,
                 ),
-                SizedBox(
+               isLoaded?Lottie.asset('assets/loadding/loading-animation.json',height: 100,width: 60): SizedBox(
                   height: Get.height/18,
                   width: Get.width/1.8,
                   child: ElevatedButton(

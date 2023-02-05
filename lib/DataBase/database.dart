@@ -74,7 +74,10 @@ class DataHelper {
         Get.snackbar('weak-password', 'The password provided is too weak.');
         print('The password provided is too weak.');
 
-      } else if (e.code == 'Email already in use') {
+      }
+    
+
+      else if (e.code == 'Email already in use') {
         Get.snackbar('email-already-in-use', 'The account already exists for that email.');
         print('The account already exists for that email.');
 

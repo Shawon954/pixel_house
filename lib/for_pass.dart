@@ -160,7 +160,7 @@ class _ForGetPasswordState extends State<ForGetPassword> {
 
                   if(isLoaded) return;
                   setState(()=>isLoaded = true);
-                  await Future.delayed(Duration(seconds: 2));
+                  await Future.delayed(Duration(seconds: 2),()=>Navigator.of(context));
                   setState(()=>isLoaded = false);
 
                   singupsubmithundel();

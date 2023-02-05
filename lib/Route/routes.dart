@@ -18,10 +18,10 @@ List<GetPage>getpage=[
   GetPage(name: '/forgotpass', page: ()=>ForGetPassword()),
   GetPage(name: '/home_page', page: ()=>HomePage()),
   GetPage(name: '/addImages_page', page: ()=>ADDImage()),
-  // GetPage(name: '/profile_page', page: ()=>Profile()),
 
 
-  GetPage(name: '/set', page: ()=> Setting()),
+
+
 
 
 

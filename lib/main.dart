@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:pixel_house/Route/routes.dart';
 import 'package:pixel_house/Splash/splash_screen.dart';
 
-void main()async{
+ void main()async{
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -19,15 +19,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'My Pixcel Store',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
       home:SplashScreen(),
-      getPages: getpage,
-      initialRoute: '/splash',
+      getPages:getpage,
+      initialRoute:'/splash',
     );
   }
 }

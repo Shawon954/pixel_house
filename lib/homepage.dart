@@ -22,6 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final _advancedDrawerController = AdvancedDrawerController();
 
   exidDilog(context) {
@@ -131,7 +132,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       selectimage = _userimage!.path;
     });
-    File imgfile = File(_userimage!.path);
+    File? imgfile = File(_userimage!.path);
     FirebaseStorage _storage = FirebaseStorage.instance;
     UploadTask uploadTask =
         _storage.ref('ProfileImage').child(_userimage!.name).putFile(imgfile);
@@ -139,7 +140,7 @@ class _HomePageState extends State<HomePage> {
     TaskSnapshot snapshot = await uploadTask;
     imageUrl = await snapshot.ref.getDownloadURL();
     print(imageUrl);
-
+    User? user = FirebaseAuth.instance.currentUser;
     CollectionReference reference = FirebaseFirestore.instance
         .collection('UserProfile')
         .doc(user!.email)
@@ -213,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         SizedBox(height: 100,),
                         Stack(
-                          children: [
+                          children:<Widget> [
                             CircleAvatar(
                                 radius: 60,
                                 child: Stack(
@@ -250,8 +251,8 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         SizedBox(
-                          height: 10,
-                        ),
+                          height: 10,),
+
                         Text(
                           'Name: ${dataread.read('name')}',
                           style: TextStyle(
@@ -297,18 +298,7 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white),
                     ),
                   ),
-                  // ListTile(
-                  //   onTap: () => Get.toNamed('/profile_page'),
-                  //   leading: Icon(Icons.home),
-                  //   title: Text(
-                  //     'profile',
-                  //     style: TextStyle(
-                  //         fontSize: 16,
-                  //         fontFamily: 'ProstoOne',
-                  //         fontWeight: FontWeight.normal,
-                  //         color: Colors.white),
-                  //   ),
-                  // ),
+
 
                   ListTile(
                     onTap: () async {
@@ -364,8 +354,7 @@ class _HomePageState extends State<HomePage> {
           ),
           body: StreamBuilder<QuerySnapshot>(
             stream: _usersStream,
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -413,7 +402,6 @@ class _HomePageState extends State<HomePage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => DETAILS(data["URL"])));
-                        print(data['URL'] + "     asdg");
                       },
                       child: Card(
                         elevation: 8,
