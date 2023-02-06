@@ -21,8 +21,10 @@ class DETAILS extends StatelessWidget {
     Get.snackbar('Image', 'Download Successfully');
   }
      else{
+
        return 'Failed';
   }
+
   }
 
  Future<void>imageshare()async{
