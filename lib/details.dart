@@ -41,6 +41,7 @@ class DETAILS extends StatelessWidget {
         automaticallyImplyLeading: true,
         backgroundColor: Colors.blueGrey,
         centerTitle: true,
+
         title: Text(
           'My Pixel ',
           style: TextStyle(
