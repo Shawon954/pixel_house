@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'My Pixcel Store',
 
+
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
