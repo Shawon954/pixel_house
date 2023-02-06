@@ -28,6 +28,7 @@ class DETAILS extends StatelessWidget {
   }
 
  Future<void>imageshare()async{
+
     await Share.share(imageLiknk);
   }
 
