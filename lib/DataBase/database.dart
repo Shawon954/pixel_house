@@ -77,11 +77,14 @@ class DataHelper {
       }
     
 
-      else if (e.code == 'Email already in use') {
+      else if (e.email == 'Email already in use') {
         Get.snackbar('email-already-in-use', 'The account already exists for that email.');
         print('The account already exists for that email.');
 
       }
+
+
+
     } catch (e) {
       print(e);
     }
