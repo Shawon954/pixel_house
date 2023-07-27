@@ -165,7 +165,7 @@ class _InternetConnectionState extends State<InternetConnection> {
               setState(()=>isLoaded = false);
 
             },
-              child: Text('Try Agine',
+              child: Text('Try Again',
                 style: TextStyle(
                     fontSize: 14,
                     fontFamily: 'ProstoOne',
